@@ -15,7 +15,7 @@ defineProps<{ data: IBookData }>()
 				params: { bookId: data.id },
 			})
 		"
-		class="bg-white rounded px-2 py-4 cursor-pointer transition-all duration-200 ease hover:shadow-md"
+		class="bg-white rounded px-2 py-4 cursor-pointer transition-all duration-300 ease hover:shadow-lg"
 	>
 		<img
 			:src="data.image || noImage"

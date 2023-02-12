@@ -38,7 +38,7 @@ watchEffect(() => {
 			<div v-if="isError">{{ error }}</div>
 			<ul
 				v-else-if="isSuccess"
-				class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-2 md:gap-4 2xl:gap-6"
+				class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 2xl:gap-6"
 			>
 				<BookCard
 					v-for="book in (data as IBookData[])"

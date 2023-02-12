@@ -12,15 +12,6 @@ const { fetchStatus, isSuccess, isError, error, data } = useQuery({
 	retry: 1,
 })
 
-// 解決閃現上一筆資料的問題，應該有更好的做法
-const showContent = ref(false)
-const waitingForDataUpdate = () => {
-	setTimeout(() => {
-		showContent.value = true
-	}, 200)
-}
-waitingForDataUpdate()
-
 watchEffect(() => {
 	fetchStatus.value === 'fetching'
 		? loadingStore.setIsLoading(true)
@@ -31,7 +22,7 @@ watchEffect(() => {
 <template>
 	<main>
 		<div v-if="isError">{{ error }}</div>
-		<div v-else-if="isSuccess" :class="{ 'opacity-0': !showContent }">
+		<div v-else-if="isSuccess">
 			<TopNav :title="data.title" />
 			<PageWrapper>
 				<BookForm formType="edit" :formData="data" />
