@@ -12,7 +12,8 @@
 	"error": {
 		"required": "此為必填欄位",
 		"404": "找不到所需資源",
-		"go_home": "回到列表頁"
+		"go_home": "回到列表頁",
+		"default": "發生錯誤"
 	},
 	"buttons": {
 		"cancel": "取消",

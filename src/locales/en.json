@@ -12,7 +12,8 @@
 	"error": {
 		"required": "This field must not be empty",
 		"404": "No resource found",
-		"go_home": "Back to Book List"
+		"go_home": "Back to Book List",
+		"default": "Something Went Wrong"
 	},
 	"buttons": {
 		"cancel": "Cancel",

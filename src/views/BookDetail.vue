@@ -33,6 +33,8 @@ const errorMessage = computed(() => {
 		switch (error.value.response?.status) {
 			case 404:
 				return t('error.404')
+			default:
+				return t('error.default')
 		}
 	}
 })
