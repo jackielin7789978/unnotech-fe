@@ -42,7 +42,9 @@ const { value: description } = useField<string>('description')
 // 新增書本
 const { mutate: mutateAdd } = useMutation({
 	mutationFn: (newBook: IBookRequest) => http.post('/books', newBook),
-	onSuccess: () => router.push({ name: 'books' }),
+	onSuccess: () => {
+		router.push({ name: 'books' })
+	},
 })
 
 // 修改書本

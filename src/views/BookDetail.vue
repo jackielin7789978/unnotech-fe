@@ -2,9 +2,11 @@
 import { fetchBook } from '@/api/queries'
 import { useQuery } from '@tanstack/vue-query'
 import { useLoadingStore } from '@/stores/loadingStore'
+import { AxiosError } from 'axios'
 
 const route = useRoute()
 const loadingStore = useLoadingStore()
+const { t } = useI18n()
 
 const { isLoading, fetchStatus, isError, error, data } = useQuery({
 	queryKey: ['book'],
@@ -26,12 +28,22 @@ watchEffect(() => {
 		? loadingStore.setIsLoading(true)
 		: loadingStore.setIsLoading(false)
 })
+const errorMessage = computed(() => {
+	if (error.value instanceof AxiosError) {
+		switch (error.value.response?.status) {
+			case 404:
+				return t('error.404')
+		}
+	}
+})
 </script>
 
 <template>
 	<main>
 		<span v-if="isLoading"></span>
-		<span v-else-if="isError">{{ error }}</span>
+		<span v-else-if="isError">
+			<ErrorMsg :msg="errorMessage" />
+		</span>
 		<div v-else :class="{ 'opacity-0': !showContent }">
 			<TopNav :title="data.title">
 				<template #rightIcon>

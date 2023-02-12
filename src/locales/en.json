@@ -10,7 +10,9 @@
 		"description": "description"
 	},
 	"error": {
-		"required": "This field must not be empty"
+		"required": "This field must not be empty",
+		"404": "No resource found",
+		"go_home": "Back to Book List"
 	},
 	"buttons": {
 		"cancel": "Cancel",

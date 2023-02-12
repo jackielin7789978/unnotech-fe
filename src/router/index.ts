@@ -12,9 +12,22 @@ declare module 'vue-router' {
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
-	scrollBehavior: (_to, _from, savedPosition) => {
-		return savedPosition ? savedPosition : { top: 0 }
+	scrollBehavior(to, from, savedPosition) {
+		// 從 detail 頁回到列表頁時，如果 savedPosition 有值就滾動到那個位置
+		// 若無值則取用 sessionStorage 中儲存的 scrollPosition
+		if (
+			(from.name === 'book_detail' || from.name === 'add_book') &&
+			to.name === 'books'
+		) {
+			return (
+				savedPosition || {
+					top: Number(sessionStorage.getItem('scrollPosition')),
+				}
+			)
+		}
+		return { top: 0 }
 	},
+
 	routes: [
 		{
 			path: '/',
@@ -59,7 +72,22 @@ const router = createRouter({
 				previousPage: 'book_detail',
 			},
 		},
+		{
+			path: '/:pathMatch(.*)*',
+			name: 'not_found',
+			component: () => import('@/views/NotFound.vue'),
+		},
 	],
+})
+
+router.afterEach((to, from) => {
+	// 從列表頁跳轉到 detail 頁時，將 scrollY 位置紀錄在 sessionStorage
+	if (
+		(from.name === 'books' && to.name === 'book_detail') ||
+		to.name === 'add_book'
+	) {
+		sessionStorage.setItem('scrollPosition', String(window.scrollY))
+	}
 })
 
 export default router
