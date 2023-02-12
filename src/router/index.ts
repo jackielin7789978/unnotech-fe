@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import i18n from '@/locales'
 import type { IconList } from '@/types'
 
 declare module 'vue-router' {
@@ -22,7 +21,7 @@ const router = createRouter({
 			name: 'books',
 			component: () => import('@/views/BookList.vue'),
 			meta: {
-				title: i18n.global.t('views.book_list'),
+				title: 'book_list', //locale key
 				rightIcon: 'plus',
 			},
 		},
@@ -31,7 +30,7 @@ const router = createRouter({
 			name: 'add-book',
 			component: () => import('@/views/AddBook.vue'),
 			meta: {
-				title: i18n.global.t('views.add_book'),
+				title: 'add_book', //locale key
 				showPreviousButton: true,
 			},
 		},
