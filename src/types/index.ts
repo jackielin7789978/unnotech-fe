@@ -9,7 +9,6 @@ export enum LocalList {
 	en,
 	zh_tw,
 }
-
 export interface IBookData {
 	id: number
 	title: string
@@ -19,10 +18,8 @@ export interface IBookData {
 	created_at?: string
 	updated_at?: string
 }
-export interface IAddBookRequest {
+export interface IBookRequest {
 	title: string
 	author: string
 	description?: string
 }
-
-export interface IEditBookRequest extends IAddBookRequest {}

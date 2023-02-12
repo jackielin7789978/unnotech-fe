@@ -2,11 +2,13 @@
 import { fetchBook } from '@/api/queries'
 import { useQuery } from '@tanstack/vue-query'
 import { useLoadingStore } from '@/stores/loadingStore'
+import { AxiosError } from 'axios'
 
 const route = useRoute()
 const loadingStore = useLoadingStore()
+const { t } = useI18n()
 
-const { fetchStatus, isSuccess, isError, error, data } = useQuery({
+const { isLoading, fetchStatus, isError, error, data } = useQuery({
 	queryKey: ['book'],
 	queryFn: () => fetchBook(route.params.bookId as string),
 	retry: 1,
@@ -26,12 +28,23 @@ watchEffect(() => {
 		? loadingStore.setIsLoading(true)
 		: loadingStore.setIsLoading(false)
 })
+const errorMessage = computed(() => {
+	if (error.value instanceof AxiosError) {
+		switch (error.value.response?.status) {
+			case 404:
+				return t('error.404')
+		}
+	}
+})
 </script>
 
 <template>
 	<main>
-		<div v-if="isError">{{ error }}</div>
-		<div v-else-if="isSuccess" :class="{ 'opacity-0': !showContent }">
+		<span v-if="isLoading"></span>
+		<span v-else-if="isError">
+			<ErrorMsg :msg="errorMessage" />
+		</span>
+		<div v-else :class="{ 'opacity-0': !showContent }">
 			<TopNav :title="data.title">
 				<template #rightIcon>
 					<IconBase
@@ -53,19 +66,23 @@ watchEffect(() => {
 					<div
 						class="bg-white px-4 py-2 flex flex-col rounded mb-4 md:text-lg md:px-5 md:py-3 md:mb-6"
 					>
-						<span class="mb-2">{{ $t('book_detail.title') }} </span>
+						<span class="mb-2 select-none">{{ $t('book_detail.title') }} </span>
 						<p>{{ data.title }}</p>
 					</div>
 					<div
 						class="bg-white px-4 py-2 flex flex-col rounded mb-4 md:text-lg md:px-5 md:py-3 md:mb-6"
 					>
-						<span class="mb-2">{{ $t('book_detail.author') }} </span>
+						<span class="mb-2 select-none"
+							>{{ $t('book_detail.author') }}
+						</span>
 						<p>{{ data.author }}</p>
 					</div>
 					<div
 						class="bg-white px-4 py-2 flex flex-col rounded mb-4 md:text-lg md:px-5 md:py-3 md:mb-6"
 					>
-						<span class="mb-2">{{ $t('book_detail.description') }}</span>
+						<span class="mb-2 select-none">{{
+							$t('book_detail.description')
+						}}</span>
 						<p class="leading-[2rem]">{{ data.description }}</p>
 					</div>
 				</section>

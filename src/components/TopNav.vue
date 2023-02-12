@@ -11,7 +11,7 @@ const title = computed(() =>
 
 <template>
 	<header
-		class="fixed w-screen top-0 z-50 flex items-center justify-center h-[60px] bg-white md:h-[80px]"
+		class="fixed w-screen top-0 z-50 flex items-center justify-center h-[60px] bg-white shadow md:h-[80px]"
 	>
 		<IconBase
 			@click="$router.push({ name: $route.meta.previousPage })"

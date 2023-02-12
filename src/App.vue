@@ -28,7 +28,7 @@ watchEffect(() => {
 
 	<IconBase
 		@click="toggleLocale"
-		class="fixed bottom-4 right-4"
+		class="fixed bottom-4 right-4 lg:bottom-6 lg:right-6 xl:text-4xl"
 		icon="fa-solid fa-language"
 	/>
 </template>

@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     BookCard: typeof import('./src/components/BookCard.vue')['default']
     BookForm: typeof import('./src/components/BookForm.vue')['default']
     ButtonBase: typeof import('./src/components/ButtonBase.vue')['default']
+    ErrorMsg: typeof import('./src/components/ErrorMsg.vue')['default']
     IconBase: typeof import('./src/components/IconBase.vue')['default']
     LoadingSpinner: typeof import('./src/components/LoadingSpinner.vue')['default']
     PageWrapper: typeof import('./src/components/PageWrapper.vue')['default']

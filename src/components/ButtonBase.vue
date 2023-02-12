@@ -12,7 +12,7 @@ const btnClass = computed(() =>
 
 <template>
 	<button
-		class="rounded-[18px] h-[40px] min-w-[80px] text-white font-semibold transition-all duration-200 ease lg:h-[48px] lg:rounded-[22px] lg:text-lg"
+		class="rounded-[18px] h-[40px] min-w-[80px] text-white font-semibold transition-all duration-200 ease select-none lg:h-[48px] lg:rounded-[22px] lg:text-lg"
 		:class="btnClass"
 	>
 		<slot />

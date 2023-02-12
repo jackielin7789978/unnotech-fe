@@ -2,36 +2,40 @@
 import { fetchBook } from '@/api/queries'
 import { useQuery } from '@tanstack/vue-query'
 import { useLoadingStore } from '@/stores/loadingStore'
+import { AxiosError } from 'axios'
 
 const route = useRoute()
 const loadingStore = useLoadingStore()
-
-const { fetchStatus, isSuccess, isError, error, data } = useQuery({
+const { t } = useI18n()
+const { fetchStatus, isLoading, isSuccess, isError, error, data } = useQuery({
 	queryKey: ['book'],
 	queryFn: () => fetchBook(route.params.bookId as string),
 	retry: 1,
 })
-
-// 解決閃現上一筆資料的問題，應該有更好的做法
-const showContent = ref(false)
-const waitingForDataUpdate = () => {
-	setTimeout(() => {
-		showContent.value = true
-	}, 200)
-}
-waitingForDataUpdate()
 
 watchEffect(() => {
 	fetchStatus.value === 'fetching'
 		? loadingStore.setIsLoading(true)
 		: loadingStore.setIsLoading(false)
 })
+
+const errorMessage = computed(() => {
+	if (error.value instanceof AxiosError) {
+		switch (error.value.response?.status) {
+			case 404:
+				return t('error.404')
+		}
+	}
+})
 </script>
 
 <template>
 	<main>
-		<div v-if="isError">{{ error }}</div>
-		<div v-else-if="isSuccess" :class="{ 'opacity-0': !showContent }">
+		<span v-if="isLoading"></span>
+		<span v-else-if="isError">
+			<ErrorMsg :msg="errorMessage" />
+		</span>
+		<div v-else-if="isSuccess">
 			<TopNav :title="data.title" />
 			<PageWrapper>
 				<BookForm formType="edit" :formData="data" />
