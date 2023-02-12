@@ -3,5 +3,18 @@
 		"book_list": "Book List",
 		"add_book": "Add a Book"
 	},
-	"author": "by "
+	"author": "by ",
+	"book_detail": {
+		"title": "Title",
+		"author": "Author",
+		"description": "description"
+	},
+	"error": {
+		"required": "This field must not be empty"
+	},
+	"buttons": {
+		"cancel": "Cancel",
+		"add": "Add Book",
+		"save": "Save"
+	}
 }

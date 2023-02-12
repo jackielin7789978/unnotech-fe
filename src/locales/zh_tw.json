@@ -3,5 +3,18 @@
 		"book_list": "書本列表",
 		"add_book": "新增書本"
 	},
-	"author": "作者："
+	"author": "作者：",
+	"book_detail": {
+		"title": "名稱",
+		"author": "作者",
+		"description": "備註"
+	},
+	"error": {
+		"required": "此為必填欄位"
+	},
+	"buttons": {
+		"cancel": "取消",
+		"add": "新增",
+		"save": "修改"
+	}
 }

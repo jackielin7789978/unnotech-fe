@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import LoadingSpinner from './components/LoadingSpinner.vue'
+import { useLoadingStore } from './stores/loadingStore'
 
 const { locale } = useI18n()
+const loadingStore = useLoadingStore()
 const toggleLocale = () => {
 	if (locale.value === 'zh_tw') {
 		locale.value = 'en'
@@ -17,6 +20,12 @@ watchEffect(() => {
 
 <template>
 	<RouterView />
+
+	<LoadingSpinner
+		v-if="loadingStore.isLoading"
+		class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+	/>
+
 	<IconBase
 		@click="toggleLocale"
 		class="fixed bottom-4 right-4"

@@ -3,9 +3,10 @@ import type { IconList } from '@/types'
 
 declare module 'vue-router' {
 	interface RouteMeta {
-		title: string
+		title?: string
 		rightIcon?: IconList
 		showPreviousButton?: boolean
+		previousPage?: string
 	}
 }
 
@@ -26,12 +27,33 @@ const router = createRouter({
 			},
 		},
 		{
+			path: '/books/:bookId',
+			name: 'book_detail',
+			component: () => import('@/views/BookDetail.vue'),
+			meta: {
+				showPreviousButton: true,
+				previousPage: 'books',
+				rightIcon: 'edit',
+			},
+		},
+		{
 			path: '/addBook',
-			name: 'add-book',
+			name: 'add_book',
 			component: () => import('@/views/AddBook.vue'),
 			meta: {
 				title: 'add_book', //locale key
 				showPreviousButton: true,
+				previousPage: 'books',
+			},
+		},
+		{
+			path: '/editBook/:bookId',
+			name: 'edit_book',
+			props: true,
+			component: () => import('@/views/EditBook.vue'),
+			meta: {
+				showPreviousButton: true,
+				previousPage: 'book_detail',
 			},
 		},
 	],
