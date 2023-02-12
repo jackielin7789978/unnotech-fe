@@ -10,5 +10,8 @@ withDefaults(
 </script>
 
 <template>
-	<font-awesome-icon class="cursor-pointer text-3xl md:text-4xl" :icon="icon" />
+	<font-awesome-icon
+		class="cursor-pointer text-xl md:text-2xl xl:text-3xl"
+		:icon="icon"
+	/>
 </template>

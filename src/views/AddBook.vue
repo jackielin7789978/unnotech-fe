@@ -1,5 +1,6 @@
-import TopNav from '@/components/TopNav.vue';
-
 <template>
 	<TopNav />
+	<PageWrapper>
+		<BookForm formType="add" />
+	</PageWrapper>
 </template>

@@ -8,11 +8,14 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BookCard: typeof import('./src/components/BookCard.vue')['default']
+    BookForm: typeof import('./src/components/BookForm.vue')['default']
+    ButtonBase: typeof import('./src/components/ButtonBase.vue')['default']
+    ErrorMsg: typeof import('./src/components/ErrorMsg.vue')['default']
     IconBase: typeof import('./src/components/IconBase.vue')['default']
+    LoadingSpinner: typeof import('./src/components/LoadingSpinner.vue')['default']
     PageWrapper: typeof import('./src/components/PageWrapper.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TheHeader: typeof import('./src/components/TheHeader.vue')['default']
     TopNav: typeof import('./src/components/TopNav.vue')['default']
   }
 }
